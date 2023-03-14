@@ -7,8 +7,11 @@ with open('ens-catalogs-data - products-prep.csv', 'r') as archivo_csv, open('se
     # Iterar sobre cada fila del archivo CSV
     for fila in lector_csv:
         name= fila['product_name'].replace("'", "")
+        if not name:
+            print ("Ya acabo")
+            break
         # Crear la sentencia INSERT INTO
-        sentencia = "INSERT INTO "+ name_table+" ('id', 'brandId', 'name','model','baseCost','measuringUnitId','isActive','isKit') VALUES ({}, {}, '{}', '{}', {}, {}, {}, {});\n".format(
+        sentencia = "INSERT INTO "+ name_table+" (`id`, `brandId`, `name`,`model`,`baseCost`,`measuringUnitId`,`isActive`,`isKit`) VALUES ({}, {}, `{}`, '{}', {}, {}, {}, {});\n".format(
             fila['id'], fila['brandId'],name,fila['model'],fila['baseCost'],fila['measuringUnitId'],fila['isActive'],fila['isKit'])
         # Escribir la sentencia en el archivo .sql
         archivo_sql.write(sentencia)
