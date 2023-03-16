@@ -1,0 +1,7 @@
+import csv
+
+with open('datos.csv', newline='') as csvfile:
+    datos = csv.DictReader(csvfile)
+    for row in datos:
+        sentencia = f"INSERT INTO tabla (id, nombre, apellido, email) VALUES ({row['id']}, \"{row['nombre']}\", \"{row['apellido']}\", \"{row['email']}\")"
+        print(sentencia)
